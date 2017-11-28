@@ -39,10 +39,10 @@ dockerが入っていない場合は、
 インストールが終わったら、ターミナルを起動して、
 
 ```bash
-alias vg="docker run --rm -i -v $(pwd):/io -w /io quay.io/vgteam/vg:v1.5.0-1674-g8b3f26a8-t108-run vg"
+$ alias vg="docker run --rm -i -v $(pwd):/io -w /io quay.io/vgteam/vg:v1.5.0-1674-g8b3f26a8-t108-run vg"
 ```
 
-を`~/.bashrc`や`~/.zshrc`に書いてください。そのあと、
+を打ちます。これでこのディレクトリでは、`vg`と打つだけで動かすことができます。そのあと、
 
 ```bash
 $ vg
@@ -146,7 +146,7 @@ $ vg view -a mapped.gam  # JSON形式で標準出力
 線形配列用のSAM/BAM形式に変換することもできます。
 
 ```bash
-$ vg surject -x graph.xg -s mapped.gam > mapped.sam  # -sの代わりに-bを指定するとBAMで出力
+$ vg surject -x graph.xg -p x -s mapped.gam > mapped.sam  # -sの代わりに-bを指定するとBAMで出力
 ```
 
 
@@ -170,14 +170,6 @@ $ vg pileup -j graph.vg mapped.gam > pileup.json  # JSON形式で出力。あと
 
 
 
-### 変異検出
-
-最後に変異検出を行います。`vg index`で作った`mapped.gam.index`があることを用います。
-
-```bash
-$ vg genotype -v graph.vg mapped.gam.index > calls.vcf
-```
-
 
 
 ### おまけ
@@ -195,5 +187,13 @@ $ vg view -Jv graph.json > graph.vg
 
 ```bash
 $ vg stats -lz graph.vg  # ノード数、エッジ数、全塩基数を出力
+```
+
+
+
+変異検出
+
+```bash
+$ vg genotype -v graph.vg mapped.gam.index > calls.vcf
 ```
 
