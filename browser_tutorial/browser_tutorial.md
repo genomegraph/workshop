@@ -23,7 +23,7 @@ $ ls
 
 ## 1000人ゲノムのデモデータ
 
-#### [1000 Genomes](http://graphgenome.tk/demo):  1000人ゲノムのvcfファイルで表現される全変異の可能性を列挙
+#### [1000 Genomes demo](http://graphgenome.tk/demo):  1000人ゲノムのvcfファイルで表現される全変異の可能性を列挙
 
 1000人ゲノムのデータから、参照配列に対してこのような多型が存在しているような関係性が発見されました。
 
@@ -35,7 +35,7 @@ $ ls
 
 これをグラフゲノムブラウザを用いれば、Alternative配列間の対応関係を陽に記述することが可能になります。
 
-Access to: [chr1:1,200,943-1,201,000](http://graphgenome.tk/demo/?chr1:1,200,943-1,201,000)
+Access to: [chr1:1,200,943-1,201,000 demo](http://graphgenome.tk/demo/?chr1:1,200,943-1,201,000)
 
 ## 1個体の構造多型を可視化したい
 
@@ -49,7 +49,7 @@ Access to: [CHM1 demo](http://graphgenome.tk/demo2/)
 
 `ファイルを選択`からvcfファイルを選択し、`upload`ボタンをクリックします。
 
-内部では、グラフゲノムブラウザにインテグレーションされた[vcf2ggf](https://github.com/harazon/vcf2ggf)が内部で動き、グラフゲノムフォーマットに変換されます。
+内部では、グラフゲノムブラウザにインテグレーションされた[vcf2ggf](https://github.com/harazono/vcf2ggf)が内部で動き、グラフゲノムフォーマットに変換されます。
 
 一度に全員がvcfファイルをアップロードするのはサーバー側に負荷をかけることになるので、今回は既に解析が済んでいるデータ(CHM1)を見てみましょう。
 
