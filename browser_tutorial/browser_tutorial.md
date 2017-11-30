@@ -22,6 +22,12 @@ Access to: [chr1:1,200,943-1,201,000 demo](http://graphgenome.tk/demo/?chr1:1,20
 
 ## 1個体の構造多型を可視化したい
 
+
+
+
+
+
+
 ここでは、1個体から得られる構造多型のデータセットを可視化して構造多型を発見したい場合、どのような流れで可視化ができるのかを紹介します。ここでは1倍体の細胞データとして、コールされた構造多型が既にデータセットとして公開されている[CHM1](http://eichlerlab.gs.washington.edu/publications/chm1-structural-variation/)を用います。
 
 Access to: [CHM1 demo](http://graphgenome.tk/demo2/)
@@ -34,13 +40,22 @@ Access to: [CHM1 demo](http://graphgenome.tk/demo2/)
 
 内部では、グラフゲノムブラウザにインテグレーションされた[vcf2ggf](https://github.com/harazono/vcf2ggf)が内部で動き、グラフゲノムフォーマットに変換されます。
 
-一度に全員がvcfファイルをアップロードするのはサーバー側に負荷をかけることになるので、今回は既に解析が済んでいるデータ(CHM1)を見てみましょう。
+
 
 ### 2. Overall View: Circos Plot
 
+Circos Plotは、発生している変異の頻度をとらえるために用いることが可能です。
+
+![Circos_NA12878](./Circos_NA12878.png)
+
+inter-chromosomeな変異が散財する場合、このように染色体をまたいで線が引かれます。
+
+
+
+一度に全員がvcfファイルをアップロードするのはサーバー側に負荷をかけることになるので、今回は既に解析が済んでいるデータ(CHM1)を見てみましょう。
 ![Circos](./Circos.png)
 
-Circos Plotは、発生している変異の頻度をとらえるために用いることが可能です。CHM1データセットはinter-chromosomalな変異を含んでいないので、Circos Plotで得られる情報には限りがあります。
+CHM1データセットはinter-chromosomalな変異を含んでいないので、Circos Plotで得られる情報には限りがあります。
 
 ### 3. Overall View: Path Region
 
