@@ -48,7 +48,7 @@ Circos Plotは、発生している変異の頻度をとらえるために用い
 
 ![Circos_NA12878](./Circos_NA12878.png)
 
-inter-chromosomeな変異が存在する場合、このように染色体をまたいで線が引かれます。
+inter-chromosomalな変異が存在する場合、このように染色体をまたいで線が引かれます。
 
 
 
