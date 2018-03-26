@@ -1,13 +1,11 @@
-vg講習会で行われたチュートリアルを日本語に訳しました（[リンク]
-(https://github.com/Pfern/PANGenomics/tree/master/exercises/toy)）。
+vg講習会で行われたチュートリアルを（かいつまんで）日本語に訳しました。[リンク]
+(https://github.com/Pfern/PANGenomics/tree/master/exercises/toy)
 ## vg を準備する
-vg をmacで動かすために、dockerを利用しています。[genome graph japan](https://github.com/genomegraph/workshop/blob/master/vg_tutorial/vg_tutorial.md)の資料を参考に設定などしました。
-このページで使っているdockerイメージはver1.5だったのと、aliasでvgを呼ぶ場合、aliasを設定したディレクトリのみしかアクセスできないため、若干書き換えています（現在の最新版に変更してます）。
+vg をmacで動かすために、dockerを利用しています。
+- Linux https://docs.docker.com/engine/installation/
+- Mac https://www.docker.com/docker-mac
 
-```bash
-$ alias vg="docker run --rm -i -v $(pwd):/io -w /io quay.io/vgteam/vg:v1.5.0-1674-g8b3f26a8-t108-run vg"
-```
-↓
+次に、`.bashrc`等に以下の関数をセットします。
 
 ```bash:.bashrc
 ...
@@ -16,13 +14,15 @@ function vg (){
 }
 ...
 ```
+`source ~/.bashrc`にて設定ファイルを再読み込みするか、ターミナルを再起動すれば任意のディレクトリでdocker経由でvgが呼び出せます。
+
 ### vg をcloneする
 まず、任意のディレクトリにvgをクローンします。
 ```bash
 $ git clone https://github.com/vgteam/vg.git
 $ mkdir exercise1
 $ cd exercise1
-$ cp -r ../vg/test/1mb1kgp ./1mb1kgp 
+$ cp -r ../vg/test/1mb1kgp ./1mb1kgp
 ```
 ### ディレクトリ構成
 ```bash
