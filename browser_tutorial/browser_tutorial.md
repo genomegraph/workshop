@@ -77,7 +77,7 @@ $ vg view -j graph.vg | pbcopy
 
 
 
-[グラフゲノムブラウザ](http://graphgenome.tk/demo3/)にアクセスし、まずはブラウザの設定で画面サイズを縮小しましょう。
+[グラフゲノムブラウザ](http://viewer.momig.tokyo/demo3/)にアクセスし、まずはブラウザの設定で画面サイズを縮小しましょう。
 
 ![Demo3-Uploader](./Zoom.png)
 
