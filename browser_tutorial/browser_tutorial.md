@@ -6,7 +6,7 @@
 
 ## 1000人ゲノムのデモデータ
 
-#### [1000 Genomes demo](http://graphgenome.tk/demo):  1000人ゲノムのvcfファイルで表現される全変異の可能性を列挙
+#### [1000 Genomes demo](http://viewer.momig.tokyo/demo):  1000人ゲノムのvcfファイルで表現される全変異の可能性を列挙
 
 1000人ゲノムのデータから、参照配列に対してこのような多型が存在しているような関係性が発見されました。
 
@@ -18,7 +18,7 @@
 
 これをグラフゲノムブラウザを用いれば、Alternative配列間の対応関係を陽に記述することが可能になります。
 
-Access to: [chr1:1,200,943-1,201,000 demo](http://graphgenome.tk/demo/?chr1:1,200,943-1,201,000)
+Access to: [chr1:1,200,943-1,201,000 demo](http://viewer.momig.tokyo/demo?chr1:1,200,943-1,201,000)
 
 ## 1個体の構造多型を可視化したい
 
@@ -30,7 +30,7 @@ Access to: [chr1:1,200,943-1,201,000 demo](http://graphgenome.tk/demo/?chr1:1,20
 
 ここでは、1個体から得られる構造多型のデータセットを可視化して構造多型を発見したい場合、どのような流れで可視化ができるのかを紹介します。ここでは1倍体の細胞データとして、コールされた構造多型が既にデータセットとして公開されている[CHM1](http://eichlerlab.gs.washington.edu/publications/chm1-structural-variation/)を用います。
 
-Access to: [CHM1 demo](http://graphgenome.tk/demo2/)
+Access to: [CHM1 demo](http://demo.momig.tokyo/)
 
 ### 1. Uploader: vcfファイルをアップロードする 
 
