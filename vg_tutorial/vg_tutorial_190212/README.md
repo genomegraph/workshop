@@ -62,6 +62,8 @@ static binaryがないので、自分でビルドする必要があります。�
 
 自分のOSに合ったものを https://rrwick.github.io/Bandage/  からダウンロードします。
 
+また、BLASTも使うので、https://github.com/rrwick/Bandage/wiki/BLAST-searches に従ってインストールし、パスを通しておきましょう。
+
 
 
 ### テストデータ
@@ -92,7 +94,7 @@ git clone hoge
 
 ## 2. どんなファイルフォーマットが使われるの？
 
-ゲノムグラフの表現には、[GFA形式](https://github.com/GFA-spec/GFA-spec)や[FASTG形式](http://fastg.sourceforge.net) が使われることが比較的多いという印象です。ただ、ゲノム配列を記述するFASTA 形式のように広く浸透しているものはなく、ソフトウェアごとに独自にフォーマットが定義されていることも珍しくはないです。ここでは使用ツールとして vg, Bandageだけにフォーカスして知っておくと良いフォーマットを列挙します。
+ゲノムグラフの表現には、[GFA形式](https://github.com/GFA-spec/GFA-spec)や[FASTG形式](http://fastg.sourceforge.net) が使われることが比較的多いという印象です。ただ、ゲノム配列を記述するFASTA 形式のように広く浸透しているものはなく、ソフトウェアごとに独自にフォーマットが定義されていることも珍しくはないです。ここでは使用ツールとして vg, Bandageだけにフォーカスして知っておくと良いフォーマットを列挙します。
 
 
 
@@ -109,7 +111,7 @@ git clone hoge
 
 ## 3. ハンズオン
 
-### データの説明
+### 3.1 データの説明
 
 https://www.nature.com/articles/ncomms11939
 
@@ -121,19 +123,25 @@ Figure4を扱う
 
 
 
-### グラフ構築
+### 3.2 グラフ構築
 
 ゲノムグラフの構築方法はいくつかありますが、ここでは`vg` が提供している方法として、 `msga` を扱ってみます。
 
+`vg msga` は入力で与えられたグラフ(or最初の配列)を核として、配列を1本ずつローカルアラインメントを取りながら、グラフにしていくコマンドです。
 
 
+
+```bash
+vg msga -f data/FL-utilization.fna -a -P 0.95 -N > graph.vg
 ```
-vg msga -f data/FL-utilization.fna -a -P 0.95 -N > graph.vg  # ローカルアラインメントを繰り返して差分情報をグラフにしていく
-```
 
 
 
-### 可視化
+
+
+
+
+### 3.3 可視化
 
 #### Bandage
 
@@ -143,11 +151,27 @@ vg view graph.vg > graph.gfa  # GFA形式に吐く。Bandageでみることが�
 
 
 
+以下Bandageのつかいかた
+
+1. `File` → `Load graph` から、作成したGFAファイルを選択
+2. `Draw graph` で描画
+3. 左下の `Create/view BLAST search` を選択
+4. `Build BLAST database`
+5. `Load from FASTA file` を選択し、`data/BR-07.rRNA.fna` と `data/BR-A29.gene.faa` をロードする。
+6. `Run BLAST search`
+7. 遺伝子の箇所に色がつく。Node label の `BLAST hit` を選択すると、遺伝子名を出すことができる。
+
+
+
+
+
 #### SequenceTubeMap
 
 ```
-vg view -j graph.vg > graph.json # JSON形式に吐く。これはsequenceTubeMapの可視化に用いる。
+vg view -j graph.vg > graph.json # JSON形式はsequenceTubeMapの可視化に用いる。
 ```
+
+吐かれたJSONファイルを http://viewer.momig.tokyo/demo3 でインプットすることで可視化できる。
 
 
 
@@ -157,3 +181,8 @@ vg view -j graph.vg > graph.json # JSON形式に吐く。これはsequenceTubeMa
 vg view -d graph.vg | dot -Tpdf -o graph.pdf
 ```
 
+
+
+
+
+いかがでしたでしょうか？
