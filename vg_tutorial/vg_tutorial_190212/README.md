@@ -7,16 +7,12 @@
 目標は
 
 * ゲノムグラフのイメージを掴む
-* ゲノムグラフはどんなファイルに保存されているのか
+* ゲノムグラフはどんなファイルに保存されているのかを知る
 * グラフを作りかたの一例を学ぶ
 * 可視化してグラフになっていることを確かめる
   * かつ、可視化ツールごとインプットの形式を知る
 
 の4点を知ることです。
-
-
-
-
 
 
 
@@ -69,7 +65,9 @@ static binaryがないので、自分でビルドする必要があります。�
 ### テストデータ
 
 ```
-git clone hoge
+git clone https://github.com/genomegraph/workshop.git
+cd vg_tutorial/vg_tutorial_190212
+ls data
 ```
 
 
@@ -99,7 +97,7 @@ git clone hoge
 
 
 * VG形式
-  * Protocol Bufferで定義されているバイナリ。ゲノムグラフ解析ツールとしてvgを使用するなら、核となる形式。JSONはほぼ一対一対応するので、自分で処理する場合はJSONに変換する。
+  * Protocol Bufferで定義されているバイナリ。ゲノムグラフ解析ツールとしてvgを使用するなら、核となる形式。JSONとほぼ一対一対応するので、自分で処理する場合はJSONに変換する。
 * GFA形式/FASTG形式
   * テキストファイル。GFAはタブ区切り、FASTGはFASTAに似ている。Bandage上での可視化に使用する。また、ゲノムアセンブラはGFA or FASTG のどちらかに対応していることが多い印象。
 * XG形式
@@ -108,6 +106,22 @@ git clone hoge
   * バイナリ。マッピングのときにインデックスとして使用する。
 * GAM形式
   * Protocol Buffer形式。SAM/BAM のグラフバージョンと思えば良い。VG形式と同じく、JSONに変換してから処理する。
+
+
+
+* グラフ構築
+
+![construction](figure/construct.png)
+
+* 可視化
+
+![visualization](figure/viz.png)
+
+
+
+* マッピング
+
+![mapping](figure/map.png)
 
 
 
@@ -141,6 +155,17 @@ vg msga -f data/FL-utilization.fna -a -P 0.95 -N > graph.vg
 
 
 
+Dockerを使っている人は、
+
+```
+docker run --rm -i -v $(pwd):/work -w /work quay.io/vgteam/vg:v1.13.0
+vg msga -f data/FL-utilization.fna -a -P 0.95 -N > graph.vg
+```
+
+のようにコンテナを立ちあげてから、中でコマンドを打ちます。
+
+
+
 #### 補足
 
 グラフの構築は他にも
@@ -165,7 +190,9 @@ vg view graph.vg > graph.gfa  # GFA形式に吐く。Bandageでみることが�
 
 
 
-以下Bandageのつかいかた
+GFAを出力できたら、あとはBandageを使って、GUIで作業します。
+
+以下Bandageの使い方
 
 1. `File` → `Load graph` から、作成したGFAファイルを選択
 2. `Draw graph` で描画
@@ -176,6 +203,8 @@ vg view graph.vg > graph.gfa  # GFA形式に吐く。Bandageでみることが�
 7. 遺伝子の箇所に色がつく。Node label の `BLAST hit` を選択すると、遺伝子名を出すことができる。
 
 
+
+alpha-galactosidaseが今回ターゲットのフコシダーゼです（KEGG上で配列検索してみてください）。ここからグラフをたどっていくと、途中で二手に分岐していることがわかります。ABC輸送体関連遺伝子の方に向かうパスは、フコシルラクトースを利用する菌株 BR-A29, BR-15 です。rRNAの方に向かうパスは BR-07株です。ABC輸送体が乗っていないことがわかります。
 
 
 
