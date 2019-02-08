@@ -80,7 +80,7 @@ ls data
 
 
 
-![genomegraph](figure/ex_genome_graph.pdf)
+![genomegraph](figure/ex_genome_graph.png)
 
 
 
