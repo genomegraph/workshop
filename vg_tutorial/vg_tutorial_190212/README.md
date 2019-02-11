@@ -69,7 +69,7 @@ git clone https://github.com/genomegraph/workshop.git
 cd vg_tutorial/vg_tutorial_190212
 ls data
 ```
-
+  
 
 
 
@@ -87,13 +87,15 @@ ls data
 
 
 ゲノムではありませんが、文字列をグラフ（フローチャート）で表現したという点では[こういう](http://loveallthis.tumblr.com/post/166124704)のもあります。
-
+  
 
 
 ## 2. どんなファイルフォーマットが使われるの？
 
-ゲノムグラフの表現には、[GFA形式](https://github.com/GFA-spec/GFA-spec)や[FASTG形式](http://fastg.sourceforge.net) が使われることが比較的多いという印象です。ただ、ゲノム配列を記述するFASTA 形式のように広く浸透しているものはなく、ソフトウェアごとに独自にフォーマットが定義されていることも珍しくはないです。ここでは使用ツールとして vg, Bandageだけにフォーカスして知っておくと良いフォーマットを列挙します。詳細は[ここ](https://drive.google.com/file/d/1R5Ub5MKmmfUI4pf_H5R2a_I8p2jQz84b/view)のP25-49にあります。
-
+ゲノムグラフの表現には、[GFA形式](https://github.com/GFA-spec/GFA-spec)や[FASTG形式](http://fastg.sourceforge.net)が使われることが比較的多いという印象です。
+ただ、ゲノム配列を記述するFASTA 形式のように広く浸透しているものはなく、ソフトウェアごとに独自にフォーマットが定義されていることも珍しくはないです。
+ここでは使用ツールとして vg, Bandageだけにフォーカスして知っておくと良いフォーマットを列挙します。フォーマットの中身の説明は[ここ](https://drive.google.com/file/d/1R5Ub5MKmmfUI4pf_H5R2a_I8p2jQz84b/view)のP25-49にあります。
+  
 
 
 ### とりあえず知っておくとよいフォーマットリスト
@@ -115,18 +117,18 @@ ls data
 ### どのフォーマットがどのタイミングで使われるか？
 
 #### グラフ構築
-
+  
 ![construction](figure/construct.png)
-
+  
 #### 可視化
-
+  
 ![visualization](figure/viz.png)
-
+  
 
 #### マッピング
-
+  
 ![mapping](figure/map.png)
-
+  
 
 
 
@@ -143,7 +145,7 @@ ls data
 
 * フコシルラクトース(FL)は、母乳に含まれるオリゴ糖の主要構成成分
 * 乳児から単離したビフィズス菌を培養したところ、FLを利用する株とそうでない株がいた
-* 比較ゲノム解析すると、FLを利用する株にはFLを分解するフコシダーゼ遺伝子の近傍にABC輸送体の遺伝子が乗っていた。FLを利用しない株はフコシダーゼ近傍にABC輸送体遺伝子は存在しなかった
+* 比較ゲノム解析の結果、FLを利用する株にはFLを分解するフコシダーゼ遺伝子の近傍にABC輸送体の遺伝子が乗っていることがわかった。対してFLを利用しない株では、フコシダーゼ近傍にABC輸送体遺伝子は存在しなかった。
 
 これを踏まえて、グラフを作ったときにABC輸送体遺伝子の乗ったパスとそうでないパスがあることを可視化して確認しましょう。
 
@@ -164,7 +166,7 @@ ls data
 
 
 
-論文で使用された全株のゲノムは[ここ](https://www.ncbi.nlm.nih.gov/bioproject/PRJDB4597)に登録されています。
+論文で使用された全株のゲノムは[ここ](https://www.ncbi.nlm.nih.gov/bioproject/PRJDB4597)から取得できます。
 
 
 
@@ -172,7 +174,7 @@ ls data
 
 ### 3.2 グラフ構築
 
-ゲノムグラフの構築方法はいくつかありますが、ここでは`vg` が提供している方法として、 `msga` を扱ってみます。
+ゲノムグラフの構築方法はいくつかありますが、ここでは`vg` が提供している方法として、 `vg msga` を扱ってみます。
 
 `vg msga` は入力で与えられたグラフ(or最初の配列)を核として、配列を1本ずつローカルアラインメント(Partial order alignment)しながら、グラフにしていくコマンドです。
 
@@ -217,7 +219,7 @@ vg view graph.vg > graph.gfa  # GFA形式に吐く。Bandageでみることが�
 
 
 
-GFAを出力できたら、あとはBandageを使って、GUIで作業します。
+GFAを出力できたら、あとはBandageを使ってGUIで作業します(Dockerで作業している場合はここでexitしてください)。
 
 以下Bandageの使い方
 
@@ -266,7 +268,7 @@ vg view -d graph.vg | dot -Tpdf -o graph.pdf
 * どんなファイルフォーマットが使われるのか
 * vgを用いてグラフを構築してみる・可視化してみる
 
-ということを扱いました。
+にフォーカスしました。
 
 
 
