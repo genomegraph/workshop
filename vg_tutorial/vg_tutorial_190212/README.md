@@ -92,9 +92,11 @@ ls data
 
 ## 2. どんなファイルフォーマットが使われるの？
 
-ゲノムグラフの表現には、[GFA形式](https://github.com/GFA-spec/GFA-spec)や[FASTG形式](http://fastg.sourceforge.net) が使われることが比較的多いという印象です。ただ、ゲノム配列を記述するFASTA 形式のように広く浸透しているものはなく、ソフトウェアごとに独自にフォーマットが定義されていることも珍しくはないです。ここでは使用ツールとして vg, Bandageだけにフォーカスして知っておくと良いフォーマットを列挙します。詳細は、[ここ](https://drive.google.com/file/d/1R5Ub5MKmmfUI4pf_H5R2a_I8p2jQz84b/view)のP25-49にあります。
+ゲノムグラフの表現には、[GFA形式](https://github.com/GFA-spec/GFA-spec)や[FASTG形式](http://fastg.sourceforge.net) が使われることが比較的多いという印象です。ただ、ゲノム配列を記述するFASTA 形式のように広く浸透しているものはなく、ソフトウェアごとに独自にフォーマットが定義されていることも珍しくはないです。ここでは使用ツールとして vg, Bandageだけにフォーカスして知っておくと良いフォーマットを列挙します。詳細は[ここ](https://drive.google.com/file/d/1R5Ub5MKmmfUI4pf_H5R2a_I8p2jQz84b/view)のP25-49にあります。
 
 
+
+### とりあえず知っておくとよいフォーマットリスト
 
 * VG形式
   * Protocol Bufferで定義されているバイナリ。ゲノムグラフ解析ツールとしてvgを使用するなら、核となる形式。JSONとほぼ一対一対応するので、自分で処理する場合はJSONに変換する。
@@ -109,17 +111,19 @@ ls data
 
 
 
-* グラフ構築
+
+### どのフォーマットがどのタイミングで使われるか？
+
+#### グラフ構築
 
 ![construction](figure/construct.png)
 
-* 可視化
+#### 可視化
 
 ![visualization](figure/viz.png)
 
 
-
-* マッピング
+#### マッピング
 
 ![mapping](figure/map.png)
 
