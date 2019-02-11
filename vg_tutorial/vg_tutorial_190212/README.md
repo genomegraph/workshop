@@ -64,7 +64,7 @@ static binaryがないので、自分でビルドする必要があります。�
 
 ### テストデータ
 
-```
+```bash
 git clone https://github.com/genomegraph/workshop.git
 cd vg_tutorial/vg_tutorial_190212
 ls data
@@ -131,13 +131,38 @@ ls data
 
 ### 3.1 データの説明
 
-今回は [Matsuki et al.](https://www.nature.com/articles/ncomms11939) のfigure4で取り上げられているフコシダーゼ遺伝子近傍のゲノム領域を、グラフ構造で表現・可視化してみます。論文の解説は[プレスリリース](https://www.titech.ac.jp/news/2016/035589.html)に任せます。
+今回は [Matsuki et al.](https://www.nature.com/articles/ncomms11939) のfigure4で取り上げられているフコシダーゼ遺伝子近傍のゲノム領域を、グラフ構造で表現・可視化してみます。論文の全体の解説は[プレスリリース](https://www.titech.ac.jp/news/2016/035589.html)が詳しいです。
 
 
 
-チュートリアル用に、フコシダーゼ遺伝子近傍のゲノム領域をあらかじめ切り出した塩基配列を3株分（BR-A29, BR-15, BR-07）用意しました（ `data/FL-utilization.fna` ）。また、アノテーションされた遺伝子配列は `data/BR-07.rRNA.fna, data/BR-A29.gene.faa`  に入っています。
+#### 背景
+
+* フコシルラクトース(FL)は、母乳に含まれるオリゴ糖の主要構成成分
+* 乳児から単離したビフィズス菌を培養したところ、FLを利用する株とそうでない株がいた
+* 比較ゲノム解析すると、FLを利用する株にはFLを分解するフコシダーゼ遺伝子の近傍にABC輸送体の遺伝子が乗っていた。FLを利用しない株はフコシダーゼ近傍にABC輸送体遺伝子は存在しなかった
+
+これを踏まえて、グラフを作ったときにABC輸送体遺伝子の乗ったパスとそうでないパスがあることを可視化して確認しましょう。
+
+
+
+#### ファイルの説明
+
+* `data/FL-utilization.fna`：フコシダーゼ遺伝子近傍のゲノム領域をあらかじめ切り出した3株分の塩基配列
+
+| 株名   | FLを利用する？ | ABC輸送体遺伝子をもつ？ |
+| ------ | -------------- | ----------------------- |
+| BR-A29 | Yes            | Yes                     |
+| BR-15  | Yes            | Yes                     |
+| BR-07  | No             | No                      |
+
+* `data/BR-A29.gene.faa`：アノテーション用遺伝子のアミノ酸配列
+* `data/BR-07.rRNA.fna`：アノテーション用rRNAの塩基配列
+
+
 
 論文で使用された全株のゲノムは[ここ](https://www.ncbi.nlm.nih.gov/bioproject/PRJDB4597)に登録されています。
+
+
 
 
 
@@ -145,9 +170,7 @@ ls data
 
 ゲノムグラフの構築方法はいくつかありますが、ここでは`vg` が提供している方法として、 `msga` を扱ってみます。
 
-`vg msga` は入力で与えられたグラフ(or最初の配列)を核として、配列を1本ずつローカルアラインメントを取りながら、グラフにしていくコマンドです。
-
-
+`vg msga` は入力で与えられたグラフ(or最初の配列)を核として、配列を1本ずつローカルアラインメント(Partial order alignment)しながら、グラフにしていくコマンドです。
 
 ```bash
 vg msga -f data/FL-utilization.fna -a -P 0.95 -N > graph.vg
@@ -157,7 +180,7 @@ vg msga -f data/FL-utilization.fna -a -P 0.95 -N > graph.vg
 
 Dockerを使っている人は、
 
-```
+```bash
 docker run --rm -i -v $(pwd):/work -w /work quay.io/vgteam/vg:v1.13.0
 vg msga -f data/FL-utilization.fna -a -P 0.95 -N > graph.vg
 ```
@@ -184,7 +207,7 @@ vg msga -f data/FL-utilization.fna -a -P 0.95 -N > graph.vg
 
 #### Bandage
 
-```
+```bash
 vg view graph.vg > graph.gfa  # GFA形式に吐く。Bandageでみることができる。
 ```
 
@@ -204,7 +227,9 @@ GFAを出力できたら、あとはBandageを使って、GUIで作業します�
 
 
 
-alpha-galactosidaseが今回ターゲットのフコシダーゼです（KEGG上で配列検索してみてください）。ここからグラフをたどっていくと、途中で二手に分岐していることがわかります。ABC輸送体関連遺伝子の方に向かうパスは、フコシルラクトースを利用する菌株 BR-A29, BR-15 です。rRNAの方に向かうパスは BR-07株です。ABC輸送体が乗っていないことがわかります。
+alpha-galactosidaseが今回のターゲットのフコシダーゼです（[KEGG上で配列検索してみてください](https://www.genome.jp/tools/blast/)）。ここからグラフをたどっていくと、ABC輸送体の乗っているパスとそうでないパスに分岐していることがわかります。
+
+
 
 
 
@@ -214,7 +239,9 @@ alpha-galactosidaseが今回ターゲットのフコシダーゼです（KEGG上
 vg view -j graph.vg > graph.json  # JSON形式はsequenceTubeMapの可視化に用いる。
 ```
 
-吐かれたJSONファイルを http://viewer.momig.tokyo/demo3 でインプットすることで可視化できる。
+吐かれたJSONファイルを http://viewer.momig.tokyo/demo3 でインプットすることで可視化できます。
+
+
 
 
 
